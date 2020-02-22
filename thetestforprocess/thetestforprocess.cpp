@@ -2,11 +2,69 @@
 //
 
 #include <iostream>
+#include <string>
+using namespace std;
+
+//Determine if the password has at least two of
+//uppercase letters, lowercase letters, and numbers
+
+bool judge(string&s)
+{
+	bool flag1 = false;//check numbers
+	bool flag2 = false;//check lowercase letters
+	bool flag3 = false;//check uppercase letters
+	for (int i = 0; i < s.length(); i++)
+	{
+		if (s[i]<'9'&&s[i]>'0')
+		{
+			flag1 = true;
+		}
+		else if (s[i]<'z'&&s[i]>'a')
+		{
+			flag2 = true;
+		}
+		else if (s[i]<'Z'&&s[i]>'A')
+		{
+			flag3 = true;
+		}
+	}
+	if ((flag1&&flag2) || (flag2&&flag3) || (flag1&&flag3))
+	{
+		return true;
+	}
+	return false;
+}
+
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	int n;
+	string password;
+	cout << "please enter the number of times that you want to enter the password:";
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> password;
+		if (password[0]<'9'&&password[0]>'0')
+		{
+			cout << "wrong" << endl;
+			continue;
+		}
+		if (password.length() < 8)
+		{
+			cout << "wrong" << endl;
+			continue;
+		}
+		if (!judge(password))
+		{
+			cout << "wrong" << endl;
+			continue;
+		}
+		cout << "yes" << endl;
+	}
+	return 0;
 }
+
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
